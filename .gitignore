@@ -1,0 +1,48 @@
+## Node
+node_modules/
+
+# PNPM
+.pnpm/
+
+# Build output
+dist/
+build/
+lib/
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.*
+local.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors/IDE
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+
+# Caches
+.cache/
+.parcel-cache/
+
+# Database
+*.sqlite
+*.db
+
+# Misc
+.history/
+logs/
+npm-debug.log
