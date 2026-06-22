@@ -11,6 +11,9 @@ import { RagModule } from './rag/rag.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'node:path';
 
+import { AppController } from './app.controller';
+import { AppService } from './app.service';
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -33,7 +36,9 @@ import { join } from 'node:path';
       serveRoot: '/public',
     }),
   ],
+  controllers: [AppController],
   providers: [
+    AppService,
     {
       provide: APP_GUARD,
       useClass: ThrottlerGuard,
