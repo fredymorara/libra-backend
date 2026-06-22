@@ -82,12 +82,18 @@ export class RagController {
     // 4. Flush chunk tokens immediately out to the React frontend
     res.setHeader('Content-Type', 'text/plain; charset=utf-8');
     res.setHeader('Transfer-Encoding', 'chunked');
+    res.flushHeaders();
 
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    for await (const textChunk of streamResult.textStream) {
-      res.write(textChunk as string);
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      for await (const textChunk of streamResult.textStream) {
+        res.write(textChunk as string);
+      }
+    } catch (error) {
+      console.error('Streaming error:', error);
+      res.write('\\n\\n[Error: Connection to AI provider failed or was interrupted]');
+    } finally {
+      res.end();
     }
-
-    res.end();
   }
 }
