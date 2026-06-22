@@ -39,7 +39,7 @@ export class RagService {
   async synthesizeEnrichment(rawMetadata: string): Promise<string> {
     try {
       const { object } = await generateObject({
-        model: this.googleClient('gemini-3.5-flash'),
+        model: this.googleClient('gemini-3-flash'),
         schema: z.object({
           enrichedProfile: z
             .string()
@@ -67,7 +67,7 @@ ${rawMetadata}`,
   async transformQuery(query: string): Promise<string[]> {
     try {
       const { object } = await generateObject({
-        model: this.googleClient('gemini-3.5-flash'),
+        model: this.googleClient('gemini-3-flash'),
         schema: z.object({
           queries: z
             .array(z.string())
@@ -95,7 +95,7 @@ ${rawMetadata}`,
       `;
 
       const { object } = await generateObject({
-        model: this.googleClient('gemini-3.5-flash'),
+        model: this.googleClient('gemini-3-flash'),
         schema: z.object({
           top_ids: z.array(z.number()),
         }),
@@ -126,7 +126,7 @@ ${rawMetadata}`,
       `;
 
       const result = streamText({
-        model: this.googleClient('gemini-3.5-flash'),
+        model: this.googleClient('gemini-3-flash'),
         system: systemPrompt,
         prompt: userQuery,
       });
