@@ -18,7 +18,7 @@ export class CatalogWorker {
 
   // Run every 5 seconds. This guarantees max 12 requests per minute,
   // keeping us safely under the 15 RPM free tier limit.
-  @Cron('*/5 * * * * *')
+  // @Cron('*/5 * * * * *') // Temporarily disabled to prevent quota exhaustion
   async processQueue() {
     if (this.isProcessing) return;
     this.isProcessing = true;
